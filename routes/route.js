@@ -29,7 +29,7 @@ router.post("/signup", async (req, res) => {
 });
 
 router.post("/loggedIn", async (req, res) => {
-  console.log(req.session.username);
+  console.log(req.session);
   if (req.session.username) {
     res.send("userloggedIn");
   } else {
