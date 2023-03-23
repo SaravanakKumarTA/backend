@@ -18,7 +18,7 @@ mongoose
   });
 
 app.use(express.json());
-app.use(cors({ origin: "http://localhost:3001", credentials: true }));
+app.use(cors({ origin: "http://localhost:3000", credentials: true }));
 app.use(
   session({
     resave: true,
@@ -37,6 +37,6 @@ app.use(
 );
 app.use("/app", routeURLs);
 
-app.listen(3000, () => {
+app.listen(4000, () => {
   console.log("Server up and running ");
 });
