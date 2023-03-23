@@ -29,21 +29,20 @@ router.post("/signup", async (req, res) => {
 });
 
 router.post("/loggedIn", async (req, res) => {
-  console.log(req.session);
   if (req.session.username) {
+    console.log(req.session.username);
     res.send("userloggedIn");
-  } else {
-    res.send("UserNotLoggedIn");
+    return;
   }
+  res.send("UserNotLoggedIn");
 });
 
 router.post("/logout", async (req, res) => {
   if (req.session.username) {
-    req.session.destroy((err) => {
-      console.log(err);
-    });
+    req.session.destroy((err) => {});
     res.send("destroyed");
   } else {
+    req.session.destroy(() => {});
     res.send("UserNotLoggedIn");
   }
 });
