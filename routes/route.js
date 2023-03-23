@@ -70,6 +70,7 @@ router.post("/login", async (req, res) => {
             console.log(username, req.session.username);
             // console.log(req.session);
             res.status(200).json("home");
+            return
           }
           if (!result) res.status(500).json("not found");
         });
