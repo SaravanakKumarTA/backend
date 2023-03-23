@@ -5,6 +5,7 @@ const dotenv = require("dotenv");
 const routeURLs = require("./routes/route");
 const cors = require("cors");
 const session = require("express-session");
+const MongoStore = require("connect-mongo")(session);
 
 dotenv.config();
 mongoose
@@ -22,12 +23,16 @@ app.use(
   session({
     resave: false,
     saveUninitialized: false,
-    secret: "i;B,<tf0>p'M6*.Y-~~C*W3NZUrE+Or/&d`C+DI'+AfW#DgLX(Z7zN#)WX(YX2U",
+    secret: "i;B,<tf0>p'M6*.Y-~~C* W3NZUrE+Or/&d`C+DI'+AfW#DgLX(Z7zN#)WX(YX2U",
     cookie: {
-      maxAge: 1000 * 60 * 60 * 24,
       sameSite: "lax",
       secure: false,
     },
+    store: new MongoStore({
+      url: process.env.DB_ACCESS, //YOUR MONGODB URL
+      ttl: 1000 * 24 * 60 * 60,
+      autoRemove: "native",
+    }),
   })
 );
 app.use("/app", routeURLs);

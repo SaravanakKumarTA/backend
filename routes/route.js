@@ -64,6 +64,9 @@ router.post("/login", async (req, res) => {
           }
           if (result) {
             req.session.username = username;
+            req.session.save((err) => {
+              console.log(err);
+            });
             // console.log(req.session);
             res.status(200).json("home");
           }
