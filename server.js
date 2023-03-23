@@ -29,7 +29,7 @@ app.use(
       secure: false,
     },
     store: new MongoStore({
-      url: process.env.DB_ACCESS, //YOUR MONGODB URL
+      url: mongoose.connection, //YOUR MONGODB URL
       ttl: 1000 * 24 * 60 * 60,
       autoRemove: "native",
     }),
