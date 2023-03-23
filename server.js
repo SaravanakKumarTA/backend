@@ -23,14 +23,12 @@ app.use(cors({ credentials: true, origin: true }));
 
 app.use(
   session({
-    resave: false,
-    saveUninitialized: false,
+    resave: true,
+    saveUninitialized: true,
     secret: "i;B,<tf0>p'M6*.Y-~~C* W3NZUrE+Or/&d`C+DI'+AfW#DgLX(Z7zN#)WX(YX2U",
     cookie: {
-      // sameSite: "none",
-      domain: "http://localhost:3000/",
+      sameSite: "lax",
       secure: false,
-      expires: 1000 * 24 * 60 * 60,
     },
     store: MongoStore.create({
       mongoUrl: process.env.DB_ACCESS, //YOUR MONGODB URL
