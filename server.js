@@ -22,9 +22,9 @@ app.use(
   session({
     resave: false,
     saveUninitialized: false,
-    secret: "This is a secret",
+    secret: "i;B,<tf0>p'M6*.Y-~~C*W3NZUrE+Or/&d`C+DI'+AfW#DgLX(Z7zN#)WX(YX2U",
     cookie: {
-      maxAge: 1000 * 60 * 60,
+      maxAge: 1000 * 60 * 60 * 24,
       sameSite: "lax",
       secure: false,
     },
