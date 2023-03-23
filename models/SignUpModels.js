@@ -17,3 +17,4 @@ const signUpTemp = new mongoose.Schema({
 );
 
 module.exports = mongoose.model("users", signUpTemp);
+
