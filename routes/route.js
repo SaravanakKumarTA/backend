@@ -4,9 +4,9 @@ const SignUpTempCopy = require("../models/SignUpModels");
 const bcrypt = require("bcrypt");
 const mongoose = require("mongoose");
 
-router.get("/",async (req,res)=>{
-  res.send("Kumar is here")
-})
+router.get("/", async (req, res) => {
+  res.send("Kumar is here");
+});
 
 router.post("/signup", async (req, res) => {
   const saltPwd = await bcrypt.genSalt(12);
@@ -29,6 +29,7 @@ router.post("/signup", async (req, res) => {
 });
 
 router.post("/loggedIn", async (req, res) => {
+  console.log(req.session.username);
   if (req.session.username) {
     res.send("userloggedIn");
   } else {
