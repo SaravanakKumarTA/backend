@@ -24,13 +24,12 @@ app.use(
     saveUninitialized: false,
     secret: "This is a secret",
     cookie: {
-      maxAge: 1000 * 60*60,
+      maxAge: 1000 * 60 * 60,
       sameSite: "lax",
       secure: false,
     },
   })
 );
-
 app.use("/app", routeURLs);
 
 app.listen(4000, () => {
