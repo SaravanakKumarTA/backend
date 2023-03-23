@@ -28,6 +28,7 @@ app.use(
     secret: "i;B,<tf0>p'M6*.Y-~~C* W3NZUrE+Or/&d`C+DI'+AfW#DgLX(Z7zN#)WX(YX2U",
     cookie: {
       sameSite: "lax",
+      domain: "http://localhost:3000",
       secure: false,
       expires: 1000 * 24 * 60 * 60,
     },
