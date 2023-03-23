@@ -3,7 +3,6 @@ const router = express.Router();
 const SignUpTempCopy = require("../models/SignUpModels");
 const bcrypt = require("bcrypt");
 const mongoose = require("mongoose");
-const session = require("express-session");
 
 router.post("/signup", async (req, res) => {
   const saltPwd = await bcrypt.genSalt(12);
@@ -25,25 +24,29 @@ router.post("/signup", async (req, res) => {
   }
 });
 
-
-
 router.post("/loggedIn", async (req, res) => {
   if (req.session.username) {
-    console.log(req.session.username);
     res.send("userloggedIn");
   } else {
     res.send("UserNotLoggedIn");
   }
 });
 
-
+router.post("/logout", async (req, res) => {
+  if (req.session.username) {
+    req.session.destroy((err) => {
+      console.log(err);
+    });
+    res.send("destroyed");
+  } else {
+    res.send("UserNotLoggedIn");
+  }
+});
 
 router.post("/login", async (req, res) => {
   if (req.session.username) {
-    console.log(req.session.username);
     res.send("userloggedIn");
   }
-  console.log(req.session.username);
   const { username, password } = req.body;
   const users = mongoose.model("users");
   users
@@ -55,7 +58,6 @@ router.post("/login", async (req, res) => {
             console.log(err);
           }
           if (result) {
-            console.log(req.sessionID);
             req.session.username = username;
             // console.log(req.session);
             res.status(200).json("home");
@@ -70,6 +72,5 @@ router.post("/login", async (req, res) => {
       console.log(err);
     });
 });
-
 
 module.exports = router;
