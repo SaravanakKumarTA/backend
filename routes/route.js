@@ -29,7 +29,7 @@ router.post("/signup", async (req, res) => {
 });
 
 router.post("/loggedIn", async (req, res) => {
-  // console.log(req.session.username);
+  console.log(req.session.username);
   if (req.session.username) {
     res.send("userloggedIn");
   } else {
@@ -63,7 +63,6 @@ router.post("/login", async (req, res) => {
           if (err) {
             console.log(err);
           }
-          console.log(username);
           if (result) {
             req.session.username = username;
             req.session.save((err) => {
