@@ -5,7 +5,7 @@ const dotenv = require("dotenv");
 const routeURLs = require("./routes/route");
 const cors = require("cors");
 const session = require("express-session");
-const MongoStore = require("connect-mongo")(session);
+const MongoStore = require("connect-mongo");
 
 dotenv.config();
 mongoose
@@ -28,8 +28,8 @@ app.use(
       sameSite: "lax",
       secure: false,
     },
-    store: new MongoStore({
-      url: mongoose.connection, //YOUR MONGODB URL
+    store: MongoStore.create({
+      mongoUrl: process.env.DB_ACCESS, //YOUR MONGODB URL
       ttl: 1000 * 24 * 60 * 60,
       autoRemove: "native",
     }),
