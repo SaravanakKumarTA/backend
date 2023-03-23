@@ -63,11 +63,11 @@ router.post("/login", async (req, res) => {
         }
         if (result) {
           req.session.username = username;
+          console.log(req.session.username);
           req.session.save((err) => {
             console.log(err);
           });
-          console.log(username, req.session.username);
-          // console.log(req.session);
+          console.log(req.session);
 
           res.status(200).json("home");
           return;
