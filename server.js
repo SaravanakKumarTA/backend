@@ -22,7 +22,7 @@ app.use(express.json());
 app.use(
   cors({
     credentials: true,
-    origin: "https://inventory-manager-front.onrender.com/",
+    origin: true,
   })
 );
 
