@@ -64,6 +64,7 @@ router.post("/login", async (req, res) => {
         if (result) {
           req.session.username = username;
           console.log(req.session.username, " logging in");
+          res.cookie(req.signedCookies);
           req.session.save((err) => {
             console.log(err);
           });

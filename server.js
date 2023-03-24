@@ -19,7 +19,12 @@ mongoose
 
 app.use(express.json());
 
-app.use(cors({ credentials: true, origin: true }));
+app.use(
+  cors({
+    credentials: true,
+    origin: "https://inventory-manager-front.onrender.com/",
+  })
+);
 
 app.use(
   session({
