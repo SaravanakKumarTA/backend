@@ -34,8 +34,8 @@ router.post("/loggedIn", async (req, res) => {
     res.send("userloggedIn");
     return;
   }
-  console.log("not logged");
-  res.send("UserNotLoggedIn");
+  console.log("not logged in logged in chk res");
+  res.send("UserNotLoggedIn in logged in chk res");
 });
 
 router.post("/logout", async (req, res) => {
@@ -44,7 +44,7 @@ router.post("/logout", async (req, res) => {
     res.send("destroyed");
   } else {
     req.session.destroy(() => {});
-    res.send("UserNotLoggedIn");
+    res.send("UserNotLoggedIn in log out");
   }
 });
 
@@ -64,7 +64,6 @@ router.post("/login", async (req, res) => {
         if (result) {
           req.session.username = username;
           console.log(req.session.username, " logging in");
-          res.cookie(req.signedCookies);
           req.session.save((err) => {
             console.log(err);
           });
