@@ -53,7 +53,8 @@ router.post("/login", async (req, res) => {
     res.send("userloggedIn");
   }
   const { username, password } = req.body;
-  // console.log(username);
+
+  console.log(username,password);
   const users = mongoose.model("users");
   users.findOne({ username: username }).then((user) => {
     if (user) {
@@ -65,7 +66,9 @@ router.post("/login", async (req, res) => {
           req.session.username = username;
           console.log(req.session.username, " logging in");
           req.session.save((err) => {
-            console.log(err);
+            if(err){
+              console.log(err);
+            }
           });
 
           res.status(200).json("home");

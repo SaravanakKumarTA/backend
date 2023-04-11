@@ -43,7 +43,7 @@ app.use(
   })
 );
 app.use("/app", routeURLs);
-
+var productroute=require('./routes/route');
 app.listen(4000, () => {
   console.log("Server up and running ");
 });
