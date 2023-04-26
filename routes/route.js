@@ -1,31 +1,12 @@
 const express = require("express");
 const router = express.Router();
 const SignUpTempCopy = require("../models/SignUpModels");
+const productSchema = require("../models/ProductModel");
 const bcrypt = require("bcrypt");
 const mongoose = require("mongoose");
 
 router.get("/", async (req, res) => {
   res.send("Kumar is here");
-});
-
-router.post("/signup", async (req, res) => {
-  const saltPwd = await bcrypt.genSalt(12);
-  const securePwd = await bcrypt.hash(req.body.password, saltPwd);
-  req.body.password = securePwd;
-  const { username, email, company, password } = req.body;
-  try {
-    const signedUpUser = await SignUpTempCopy.create({
-      username,
-      email,
-      company,
-      password,
-    });
-    req.session.name = username;
-    res.status(200).json({ username: signedUpUser.username });
-  } catch (e) {
-    console.log(e);
-    res.status(400).json({ e: e.message });
-  }
 });
 
 router.post("/loggedIn", async (req, res) => {
@@ -54,7 +35,7 @@ router.post("/login", async (req, res) => {
   }
   const { username, password } = req.body;
 
-  console.log(username,password);
+  console.log(username, password);
   const users = mongoose.model("users");
   users.findOne({ username: username }).then((user) => {
     if (user) {
@@ -66,7 +47,7 @@ router.post("/login", async (req, res) => {
           req.session.username = username;
           console.log(req.session.username, " logging in");
           req.session.save((err) => {
-            if(err){
+            if (err) {
               console.log(err);
             }
           });
@@ -82,6 +63,45 @@ router.post("/login", async (req, res) => {
       return;
     }
   });
+});
+router.post("/signup", async (req, res) => {
+  const saltPwd = await bcrypt.genSalt(12);
+  const securePwd = await bcrypt.hash(req.body.password, saltPwd);
+  req.body.password = securePwd;
+  const { username, email, company, password } = req.body;
+  try {
+    const signedUpUser = await SignUpTempCopy.create({
+      username,
+      email,
+      company,
+      password,
+    });
+    req.session.name = username;
+    res.status(200).json({ username: signedUpUser.username });
+  } catch (e) {
+    console.log(e);
+    res.status(400).json({ e: e.message });
+  }
+});
+
+router.post("/addproduct", async (req, res) => {
+  const { seller, productName, type, desc, quantity, price, url } = req.body;
+  try {
+    const addProduct = await productSchema.create({
+      seller,
+      productName,
+      type,
+      desc,
+      quantity,
+      price,
+      url,
+    });
+    console.log("Product added successfully");
+    res.status(200).json({ data: "product added" });
+  } catch (e) {
+    console.log("Error in adding product");
+    res.status(400).json({ e: e.message });
+  }
 });
 
 module.exports = router;

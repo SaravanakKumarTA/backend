@@ -22,37 +22,41 @@ const reviewSchema = mongoose.Schema(
     timeStamps: true,
   }
 );
-const productscreen = mongoose.Schema(
+const productSchema = mongoose.Schema(
   {
-    name: {
+    seller: {
       type: String,
       require: true,
     },
-    image: {
+    productName: {
       type: String,
       require: true,
     },
-    category: {
-      type: Number,
-      require: true,
-    },
-    productDescription: {
+    url: {
       type: String,
       require: true,
     },
-    countInStock: {
+    type: {
+      type: String,
+      require: true,
+    },
+    desc: {
+      type: String,
+      require: true,
+    },
+    quantity: {
       type: Number,
       require: true,
     },
-    Rating: {
+    price: {
       type: Number,
       require: true,
     },
-    reviews: [reviewSchema],
+    //reviews: [reviewSchema],
   },
   {
-    timeStamps: true
+    timeStamps: true,
   }
 );
 
-
+module.exports = mongoose.model("products", productSchema);

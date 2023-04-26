@@ -6,7 +6,7 @@ const routeURLs = require("./routes/route");
 const cors = require("cors");
 const session = require("express-session");
 const MongoStore = require("connect-mongo");
-
+//db connenction
 dotenv.config();
 mongoose
   .connect(process.env.DB_ACCESS)
@@ -18,14 +18,14 @@ mongoose
   });
 
 app.use(express.json());
-
+//cors no use for now
 app.use(
   cors({
     credentials: true,
     origin: true,
   })
 );
-
+//session
 app.use(
   session({
     resave: true,
@@ -43,7 +43,7 @@ app.use(
   })
 );
 app.use("/app", routeURLs);
-var productroute=require('./routes/route');
+var productroute = require("./routes/route");
 app.listen(4000, () => {
   console.log("Server up and running ");
 });
